@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.pf.flower.dao.RiderOrderDao">
+
+	<select id="ridingListSelect"
+	 	parameterType="com.pf.flower.dto.ListDto"
+	 	resultType="com.pf.flower.dto.OrderDto">
+	 	SELECT * FROM olist
+	 	where o_type="배송" and o_status="주문접수"
+	 	<if test="colname != null and colname != ''">
+	 	and ${colname} LIKE concat('%',#{keyword},'%')
+	 	</if>
+	 	LIMIT #{pageNum}, #{listCnt}
+	</select>
+	
+	
+	
+	<select id="rcntSelect"
+	 	parameterType="com.pf.flower.dto.ListDto"
+	 	resultType="int">
+		SELECT count(*) FROM olist
+		where o_type="배송" and o_status="주문접수"
+		<if test="colname != null and colname != ''">
+	 	WHERE ${colname} LIKE concat('%',#{keyword},'%')
+	 	</if>
+	</select>
+	
+	
+	 <!-- 라이더 배송 확인  -->
+	<insert id="ridingInsert" parameterType="com.pf.flower.dto.RiderOrderDto">
+		INSERT INTO rider_order
+		VALUES (#{ro_onum}, #{ro_rid}, default)
+	</insert>
+	
+	<!-- 배송정보 ordertbl 전송 -->
+	<update id="ridingUpdate" parameterType="com.pf.flower.dto.OrderDto">
+		UPDATE ordertbl SET o_rnum=#{o_rnum} WHERE o_num=#{o_num};
+	</update>
+	
+	<select id="roListSelect" 
+	 	parameterType="com.pf.flower.dto.RoListDto"
+	 	resultType="com.pf.flower.dto.OrderDto">
+	 	select * from rdolist 
+	 	WHERE ro_rid=#{ro_rid}
+	 	<if test="rocolname != null and rocolname != ''">
+	 	AND ${rocolname} LIKE concat('%',#{rokeyword},'%')
+	 	</if>
+	 	LIMIT #{ropageNum}, #{rolistCnt}
+	</select>
+	
+	<select id="rocntSelect"
+	 	parameterType="com.pf.flower.dto.RoListDto"
+	 	resultType="int">
+		SELECT count(*) FROM rolist
+		WHERE ro_rid=#{ro_rid}
+		<if test="rocolname != null and rocolname != ''">
+	 	AND ${rocolname} LIKE concat('%',#{rokeyword},'%') 
+	 	</if>
+	</select>
+	
+	<update id="rupdateStatus"
+		parameterType="com.pf.flower.dto.OrderDto">
+		update ordertbl set o_status=#{o_status} where o_num=#{o_num}
+	</update>
+	
+	<select id="orderSelect"
+		parameterType="String"
+		resultType="com.pf.flower.dto.OrderDto">
+		SELECT * FROM olist WHERE o_num=#{onum}
+	</select>
+	
+	<select id="odlistSelect"
+		parameterType="String"
+		resultType="com.pf.flower.dto.OrderDto">
+		SELECT * FROM odlist WHERE od_onum=#{onum}
+	</select>
+	
+	<!-- 배송확인 시 o_rnum 업데이트 -->
+	<update id="roUpdate" parameterType="com.pf.flower.dto.OrderDto">
+		update ordertbl set o_rnum=#{o_rnum} where o_num=#{o_num}
+	</update>
+	
+	
+</mapper>

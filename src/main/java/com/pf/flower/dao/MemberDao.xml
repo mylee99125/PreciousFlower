@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.pf.flower.dao.MemberDao">
+	
+	<select id="memberListSelect" parameterType="com.pf.flower.dto.mListDto" resultType="com.pf.flower.dto.MemberDto">
+		SELECT * FROM mlist
+		<if test="mcolname != null and mcolname != ''">
+			WHERE ${mcolname} LIKE concat('%',#{mkeyword},'%')
+		</if>
+		LIMIT #{mpageNum}, #{mlistCnt}
+	</select>
+	
+	<select id="mcntSelect" parameterType="com.pf.flower.dto.mListDto" resultType="int">
+		SELECT count(*) FROM mlist
+		<if test="mcolname != null and mcolname != ''">
+			WHERE ${mcolname} LIKE concat('%',#{mkeyword},'%')
+		</if>
+	</select>
+	
+	<select id="memberSelect" parameterType="String" resultType="com.pf.flower.dto.MemberDto">
+		SELECT * FROM minfo
+		WHERE m_id=#{m_id}
+	</select>
+	
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM membertbl WHERE m_id=#{m_id}
+	</delete> 
+	
+	<select id="midCheck" parameterType="String" resultType="int">
+		select count(*) from membertbl where m_id=#{mid}
+	</select>
+
+	<insert id="memberInsert"
+		parameterType="com.pf.flower.dto.MemberDto">
+		insert into membertbl 
+		(m_id, m_pwd, m_name, m_birth, m_phone, m_addr1, m_addr2, m_addr3, m_email, m_history, m_gcode)
+		values 
+		(#{m_id}, #{m_pwd}, #{m_name}, #{m_birth}, #{m_phone}, #{m_addr1}, #{m_addr2}, #{m_addr3}, #{m_email}, default, null);
+	</insert>
+
+	<select id="pwdSelect" parameterType="String"
+		resultType="String">
+		select m_pwd from membertbl where m_id=#{mid}
+	</select>
+	
+	<select id="bringMember" parameterType="String"
+		resultType="com.pf.flower.dto.MemberDto">
+		select * from membertbl where m_id=#{mid}
+	</select>
+	
+	<update id="memberUpdate"
+		parameterType="com.pf.flower.dto.MemberDto">
+		UPDATE membertbl SET 
+		m_phone=#{m_phone},
+		m_email=#{m_email},
+		m_addr1=#{m_addr1},
+		m_addr2=#{m_addr2},
+		m_addr3=#{m_addr3}
+		WHERE m_id=#{m_id}
+	</update>
+	
+	<delete id="mdelete" parameterType="com.pf.flower.dto.MemberDto">
+		UPDATE membertbl SET m_pwd=null WHERE m_id=#{m_id};
+	</delete>
+	
+	<select id="hmemberSelect" parameterType="String"
+		resultType="com.pf.flower.dto.MemberDto">
+		select * from mlist where m_id=#{mid}
+	</select>
+	
+</mapper>

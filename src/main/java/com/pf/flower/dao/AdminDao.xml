@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pf.flower.dao.AdminDao">
+	<select id="pwdSelect" parameterType="String"
+		resultType="String">
+		select a_pwd from admintbl where a_id=#{a_id}
+	</select>
+	
+	<select id="codeCheck" parameterType="String"
+		resultType="int">
+		SELECT count(*) FROM product WHERE p_code=#{p_code}
+	</select>
+	
+	<insert id="pInsert" 
+		parameterType="com.pf.flower.dto.ProductDto">
+		insert into product values
+			(#{p_code}, #{p_name}, #{p_price}, #{p_detail})
+	</insert>
+	
+	<insert id="fileInsert" parameterType="HashMap">
+		insert into productfile values
+			(#{p_code}, NULL, #{oriname}, #{sysname})
+	</insert>
+	
+	<select id="productListSelect" 
+		parameterType="com.pf.flower.dto.apListDto"
+		resultType="com.pf.flower.dto.ProductDto">
+		SELECT * FROM plist
+		<if test="apcolname != null and apcolname != ''">
+			WHERE ${apcolname} LIKE concat('%', #{apkeyword}, '%')
+		</if>
+		LIMIT #{appageNum}, #{aplistCnt}
+	</select>
+	
+	<select id="pcntSelect"
+		parameterType="com.pf.flower.dto.apListDto"
+		resultType="int">
+		SELECT count(*) FROM plist
+		<if test="apcolname != null and apcolname != ''">
+			WHERE ${apcolname} LIKE concat('%', #{apkeyword}, '%')
+		</if>
+	</select>
+	
+	<select id="productSelect" parameterType="String"
+		resultType="com.pf.flower.dto.ProductDto">
+		SELECT * FROM product WHERE p_code=#{p_code}
+	</select>
+	
+	<select id="fileSelect" parameterType="String"
+		resultType="com.pf.flower.dto.PfileDto">
+		SELECT * FROM productfile WHERE pf_pcode=#{p_code}
+	</select>
+	
+	<delete id="fileDelete" parameterType="String">
+		DELETE FROM productfile WHERE pf_sysname=#{sysname}
+	</delete>
+	
+	<update id="productUpdate" 
+		parameterType="com.pf.flower.dto.ProductDto">
+		UPDATE product SET p_code=#{p_code},
+						   p_name=#{p_name},
+						   p_price=#{p_price},
+						   p_detail=#{p_detail}
+		WHERE p_code=#{p_code}
+	</update>
+	
+	<delete id="fListDelete" parameterType="String">
+		DELETE FROM productfile WHERE pf_pcode=#{p_code}
+	</delete>
+	<delete id="productDelete" parameterType="String">
+		DELETE FROM product WHERE p_code=#{p_code}
+	</delete>
+	<delete id="reviewDelete" parameterType="String">
+		delete from review where re_pcode=#{p_code}
+	</delete>
+	
+	<insert id="setVisitTotalCount">
+		insert into visit value (default)	
+	</insert>
+	
+	<select id="getVisitTotalCount"
+		parameterType="com.pf.flower.dto.VisitDto" resultType="int">
+		select * from vview
+	</select>
+	
+	<select id="getTodayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate();
+	</select>
+	<select id="get1bdayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate()-1;
+	</select>
+	<select id="get2bdayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate()-2;
+	</select>
+	<select id="get3bdayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate()-3;
+	</select>
+	<select id="get4bdayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate()-4;
+	</select>
+	<select id="get5bdayTotalCount" resultType="int">
+		select ifnull(sum(o_price), 0) from ordertbl where date(o_date)=curdate()-5;
+	</select>
+	
+	<select id="orderListSelect" 
+		parameterType="com.pf.flower.dto.oListDto"
+		resultType="com.pf.flower.dto.OrderDto">
+		SELECT * FROM ordertbl order by o_date desc
+		<if test="ocolname != null and ocolname != ''">
+			WHERE ${ocolname} LIKE concat('%', #{okeyword}, '%')
+		</if>
+		LIMIT #{opageNum}, #{olistCnt}
+	</select>
+	
+	<select id="ocntSelect"
+		parameterType="com.pf.flower.dto.oListDto"
+		resultType="int">
+		SELECT count(*) FROM ordertbl
+		<if test="ocolname != null and ocolname != ''">
+			WHERE ${ocolname} LIKE concat('%', #{okeyword}, '%')
+		</if>
+	</select>
+	
+	<select id="ordersum"
+		parameterType="com.pf.flower.dto.oListDto"
+		resultType="int">
+		select sum(o_price) from ordertbl
+		<if test="ocolname != null and ocolname != ''">
+			WHERE ${ocolname} LIKE concat('%', #{okeyword}, '%')
+		</if>
+	</select>
+	
+	<update id="upStatus"
+		parameterType="com.pf.flower.dto.OrderDto">
+		update ordertbl set o_status=#{o_status} where o_num=#{o_num}
+	</update>
+	
+	<select id="orderSelect" parameterType="String"
+		resultType="com.pf.flower.dto.OrderDto">
+		select * from olist where o_num=#{o_num}
+	</select>
+	
+	<select id="odlistSelect" resultType="com.pf.flower.dto.OrderDto">
+		select * from odlist where od_onum=#{o_num}	
+	</select>
+	
+	
+	<!-- Member -->
+	<select id="memberListSelect" parameterType="com.pf.flower.dto.mListDto" resultType="com.pf.flower.dto.MemberDto">
+		SELECT * FROM mlist
+		<if test="mcolname != null and mcolname != ''">
+			WHERE ${mcolname} LIKE concat('%',#{mkeyword},'%')
+		</if>
+		LIMIT #{mpageNum}, #{mlistCnt}
+	</select>
+	
+	<select id="mcntSelect" parameterType="com.pf.flower.dto.mListDto" resultType="int">
+		SELECT count(*) FROM mlist
+		<if test="mcolname != null and mcolname != ''">
+			WHERE ${mcolname} LIKE concat('%',#{mkeyword},'%')
+		</if>
+	</select>
+	
+	<select id="memberSelect" parameterType="String" resultType="com.pf.flower.dto.MemberDto">
+		SELECT * FROM minfo
+		WHERE m_id=#{m_id}
+	</select>
+	
+	<delete id="memberDelete" parameterType="String">
+		DELETE FROM membertbl WHERE m_id=#{m_id}
+	</delete>
+	
+	<update id="memberUpdate" parameterType="String">
+		UPDATE FROM membertbl SET m_birth=#{m_birth}, m_phone=#{m_phone}, m_email=#{m_email}, m_addr1=#{m_addr1}, m_addr1=#{m_addr2}, m_addr1=#{m_addr3}
+		WHERE m_id=#{m_id}
+	</update>
+	
+	<select id="memberOlist" parameterType="String" resultType="com.pf.flower.dto.OrderDto">
+		SELECT o_num, o_date FROM olist
+		WHERE o_mid=#{o_mid}
+	</select>
+	
+	<select id="rmemberListSelect" parameterType="com.pf.flower.dto.rmListDto" resultType="com.pf.flower.dto.RiderDto">
+		SELECT * FROM rmlist
+		<if test="rmcolname != null and rmcolname != ''">
+			WHERE ${rmcolname} LIKE concat('%',#{rmkeyword},'%')
+		</if>
+		LIMIT #{rmpageNum}, #{rmlistCnt}
+	</select>
+	
+	<select id="rmcntSelect" parameterType="com.pf.flower.dto.rmListDto" resultType="int">
+		SELECT count(*) FROM rmlist
+		<if test="rmcolname != null and rmcolname != ''">
+			WHERE ${rmcolname} LIKE concat('%',#{rmkeyword},'%')
+		</if>
+	</select>
+	
+	<select id="rmemberSelect" parameterType="String" resultType="com.pf.flower.dto.RiderDto">
+		SELECT * FROM rinfo
+		WHERE r_id=#{r_id}
+	</select>
+	
+	<delete id="rmemberDelete" parameterType="String">
+		DELETE FROM rider WHERE r_id=#{r_id}
+	</delete>
+	
+	<select id="riderOlist" parameterType="String" resultType="com.pf.flower.dto.OrderDto">
+		SELECT o_num, o_date FROM olist
+		WHERE r_id=#{r_id}
+	</select>
+	
+	
+	<!-- Notice -->
+	<select id="noticeListSelect" parameterType="com.pf.flower.dto.nListDto" resultType="com.pf.flower.dto.NoticeDto">
+		SELECT * FROM nlist order by n_num
+		<if test="ncolname != null and ncolname != ''">
+			WHERE ${ncolname} LIKE concat('%',#{nkeyword},'%')
+		</if>
+		LIMIT #{npageNum}, #{nlistCnt}
+	</select>
+	
+	<select id="ncntSelect" parameterType="com.pf.flower.dto.nListDto" resultType="int">
+		SELECT count(*) FROM nlist
+		<if test="ncolname != null and ncolname != ''">
+			WHERE ${ncolname} LIKE concat('%',#{nkeyword},'%')
+		</if>
+	</select>
+	
+	<insert id="noticeInsert" parameterType="com.pf.flower.dto.NoticeDto" useGeneratedKeys="true" keyProperty="n_num">
+		<selectKey keyProperty="n_num" resultType="Integer"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		INSERT INTO notice
+		VALUES (NULL,#{n_aid},#{n_title},#{n_contents},DEFAULT,DEFAULT)
+	</insert>
+	
+	<select id="noticeSelect" parameterType="Integer" resultType="com.pf.flower.dto.NoticeDto">
+		SELECT * FROM nlist WHERE n_num=#{n_num}
+	</select>
+	
+	<update id="viewCount" parameterType="com.pf.flower.dto.NoticeDto">
+		UPDATE notice SET n_views=#{n_views}
+		WHERE n_num=#{n_num}
+	</update>
+	
+	<update id="noticeUpdate" parameterType="com.pf.flower.dto.NoticeDto">
+		UPDATE notice SET n_title=#{n_title}, n_contents=#{n_contents}
+		WHERE n_num=#{n_num}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="Integer">
+		DELETE FROM notice
+		WHERE n_num=#{n_num}
+	</delete>
+	
+	<select id="hnListSelect" parameterType="com.pf.flower.dto.hnListDto" resultType="com.pf.flower.dto.NoticeDto">
+		SELECT * FROM nlist order by n_num
+		<if test="hncolname != null and hncolname != ''">
+			WHERE ${hncolname} LIKE concat('%',#{hnkeyword},'%')
+		</if>
+		LIMIT #{hnpageNum}, #{hnlistCnt}
+	</select>
+	
+	<select id="hncntSelect" parameterType="com.pf.flower.dto.hnListDto" resultType="int">
+		SELECT count(*) FROM nlist
+		<if test="hncolname != null and hncolname != ''">
+			WHERE ${hncolname} LIKE concat('%',#{hnkeyword},'%')
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pf.flower.dao.MainDao">
+	<select id="pListSelect" 
+		parameterType="com.pf.flower.dto.pListDto"
+		resultType="com.pf.flower.dto.ProductDto">
+		SELECT * FROM plist
+		WHERE p_code LIKE concat(#{codestr},'%') 
+		LIMIT #{ppageNum}, #{plistCnt}
+	</select>
+	
+	<select id="pcntSelect"
+		parameterType="com.pf.flower.dto.pListDto"
+		resultType="int">
+		SELECT count(*) FROM plist
+		WHERE p_code LIKE concat(#{codestr},'%') 
+	</select>
+	
+	<select id="fcontents" parameterType="String"
+		resultType="com.pf.flower.dto.ProductDto">
+		SELECT * FROM plist WHERE p_code=#{p_code}
+	</select>
+	
+	<select id="reSelect" parameterType="String"
+		resultType="com.pf.flower.dto.ReviewDto">
+		select * from relist where re_pcode=#{p_code}
+	</select>
+	
+	<select id="pwdSelect" parameterType="String"
+		resultType="String">
+		select m_pwd from membertbl where m_id=#{mid}
+	</select>
+	
+	<select id="bringMember" parameterType="String"
+		resultType="com.pf.flower.dto.MemberDto">
+		select * from membertbl where m_id=#{m_id}
+	</select>
+	 
+	<select id="cartListSelect" resultType="com.pf.flower.dto.CartDto">
+		select * from clist where c_mid=#{mid}
+	</select>
+	
+	<delete id="cartDelete" parameterType="int">
+		delete from cart where c_num=#{c_num}
+	</delete>
+	
+	<insert id="addcart" parameterType="com.pf.flower.dto.CartDto">
+		insert into cart values
+			(default, #{c_mid}, #{c_pcode}, #{c_count}, #{c_pname}, #{c_pprice})
+	</insert>
+	
+	<select id="memberSelect" parameterType="String"
+		resultType="com.pf.flower.dto.MemberDto">
+		select * from mlist where m_id=#{mid}
+	</select>
+	
+	<update id="memberUpdate"
+      parameterType="com.pf.flower.dto.MemberDto">
+      UPDATE membertbl SET 
+      m_phone=#{m_phone},
+      m_email=#{m_email},
+      m_addr1=#{m_addr1},
+      m_addr2=#{m_addr2},
+      m_addr3=#{m_addr3}
+      WHERE m_id=#{m_id}
+   </update>
+   
+   <delete id="mdelete" parameterType="com.pf.flower.dto.MemberDto">
+      DELETE FROM membertbl where m_id=#{m_id};
+   </delete>
+   
+   <insert id="fOrderInsert" parameterType="com.pf.flower.dto.OrderDto">			    
+		insert into ordertbl 
+		values(#{o_num}, #{o_mid}, null, default, #{o_rdate}, #{o_rec}, #{o_phone}, 
+				#{o_addr1}, #{o_addr2}, #{o_addr3}, #{o_price}, #{o_type}, '카카오페이', '주문접수');
+	</insert>
+	
+	<insert id="odInsert" parameterType="com.pf.flower.dto.OrderDto">
+		insert into orderdetail (od_onum, od_mid, od_pcode, od_count, od_pname, od_price)
+			select #{o_num}, #{o_mid}, c_pcode, c_count, c_pname, c_pprice from cart where c_mid=#{o_mid};
+	</insert>
+	
+	<update id="upHistory" parameterType="com.pf.flower.dto.MemberDto">
+		update membertbl set m_history=#{m_history} where m_id=#{m_id}
+	</update>
+	
+	<delete id="deleteCart" parameterType="String">
+		DELETE from cart where c_mid=#{o_mid}
+	</delete>
+	
+	<select id="molistSelect" resultType="com.pf.flower.dto.OrderDto">
+	 	select * from ordertbl WHERE o_mid=#{mid} order by o_date desc
+	</select>
+	
+	<select id="oddetail" parameterType="String"
+		resultType="com.pf.flower.dto.OrderDto">
+		select * from olist where o_num=#{od_onum}
+	</select>
+	
+	<select id="odcontents" parameterType="String"
+		resultType="com.pf.flower.dto.OrderDto">
+		SELECT * FROM odlist WHERE od_onum=#{od_onum}
+	</select>
+	
+	<insert id="reviewInsert" parameterType="com.pf.flower.dto.ReviewDto">
+		INSERT INTO review
+			VALUES (default, #{re_pcode}, #{re_score}, #{re_contents}, default, #{re_mid} )
+	</insert>
+	
+	<update id="refsubmit" parameterType="com.pf.flower.dto.OrderDto">
+		update ordertbl set o_status='환불접수' where o_num=#{o_num};
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
