@@ -4,10 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>Precious Flower - Mypage</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 <script type="text/javascript">
 $(function(){
 	var msg = "${msg}";

@@ -8,19 +8,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Zay Shop - DayCount Page</title>
+<title>Precious Flower - Day Counter</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 </head>
 <style>
 #dayform {
 	width: 1000px;
 	height: 900px;
-	padding: 20px 20px 50px 20px;
+	padding: 50px 20px 50px 20px;
 	text-align: center;
 	margin: auto;
-	margin-top: 20px;
-	margin-bottom: 70px;
 	border-radius: 10px;
 }
 #day-top {
@@ -146,6 +145,12 @@ input::placeholder {
 	margin: 4px;
 	margin-bottom: 10px;
 }
+#daydiv {
+	background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+}
+h3 {
+	padding-top: 5px;
+}
 </style>
 
 <body>
@@ -153,6 +158,7 @@ input::placeholder {
 	<jsp:include page="header.jsp"/>
 	</header>
 	
+	<div id="daydiv">
 	<div id="dayform">
 		<div id="day_top">
 			<h2>D-DAY 계산기</h2>
@@ -190,6 +196,7 @@ input::placeholder {
 				</li>
 			</ul>
 		</div>
+	</div>
 	</div>
 	
 	<footer>

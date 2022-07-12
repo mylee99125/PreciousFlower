@@ -40,14 +40,14 @@ public interface AdminDao {
 	public List<PfileDto> fileSelect(String p_code);
 	//파일 삭제(개별-게시글 수정)
 	public void fileDelete(String sysname);
-	//파일목록 삭제
-	public void fListDelete(String p_code);
 	//상품 수정
 	public void productUpdate(ProductDto product);
-	//상품 삭제
-	public void productDelete(String p_code);
 	//리뷰 삭제
 	public void reviewDelete(String p_code);
+	//파일목록 삭제
+	public void fListDelete(String p_code);
+	//상품 삭제
+	public void productDelete(String p_code);
 	
 	//Admin Home
 	//전체 방문자 수 증가

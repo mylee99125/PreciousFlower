@@ -15,6 +15,9 @@
 #pfile label {
 	cursor: pointer;
 }
+h3 {
+	padding-top: 10px;
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -45,12 +48,12 @@ $(function(){
 				<tr>
 					<th>상품코드 :</th>
 					<td>
-						<input type="text" id="p_code" name="p_code" value="${product.p_code}" autofocus required> 
+						<input type="text" id="p_code" name="p_code" value="${product.p_code}" required readonly> 
 					</td>
 				</tr>
 				<tr>
 					<th>상품명 :</th>
-					<td><input type="text" name="p_name" required
+					<td><input type="text" name="p_name"  autofocus required
 						value="${product.p_name}"></td>
 				</tr>
 				<tr>

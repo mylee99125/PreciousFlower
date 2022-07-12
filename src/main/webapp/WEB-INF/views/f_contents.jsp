@@ -4,13 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <head>
-<title>Precious Flower - Product Detail Page</title>
+<title>Precious Flower - Product Detail</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="resources/img/apple-icon.png">
 <link rel="shortcut icon" type="image/x-icon"
-	href="resources/img/favicon.ico">
+	href="resources/images/favicon.png">
 
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/templatemo.css">
@@ -36,31 +36,36 @@
 	});
 </script>
 <style type="text/css">
-#fclist {
-	border: 2px solid;
-	border-left: none;
-	border-right: none;
-	border-color: #AAEBAA;
-	border-collapse: collapse;
-	margin-top: 10px;
+.bubble {
+	position: relative;
+	width: 600px;
+	padding: 10px;
+	background: #dcdcdc;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-left: 25px;
 }
-#fcth {
-	width: 1%;
-	background-color: #E6FFE6;
-	border-bottom: 2px solid;
-	border-bottom-color: #AAEBAA;
-	font-size: 15px;
-	padding: 8px;
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	border-style: solid;
+	border-width: 8px 16px 8px 0;
+	border-color: transparent #dcdcdc;
+	display: block;
+	width: 0;
+	z-index: 1;
+	left: -16px;
+	top: 16px;
 }
-#ltr {
-	text-align: center;
-	border-bottom: 1px solid;
-	border-bottom-color: #d2d2d2;
+
+#retab {
+	width: 100%;
 }
-#ltd {
-	font-size: 13px;
-	vertical-align: middle;
-	padding: 8px;
+
+#fcbut {
+	padding-left: 20px;
 }
 </style>
 </head>
@@ -76,9 +81,11 @@
             <br><h4>상품 상세</h4><hr>
             <div class="row">
                 <div class="col-lg-5 mt-5">
+                        <img class="pcard-img img-fluid" src="resources/upload/${fCon.pf_sysname}" alt="Card image cap" id="product-detail">
+                    <!-- 
                     <div class="card mb-3">
-                        <img class="card-img img-fluid" src="resources/upload/${fCon.pf_sysname}" alt="Card image cap" id="product-detail">
                     </div>
+                     -->
                 </div>
                 <!-- col end -->
                 <div class="col-lg-7 mt-5">
@@ -129,7 +136,10 @@
                                 </div>
                                 <div class="row pb-3">
                                     <div class="col d-grid">
-                                        <button type="submit" class="btn btn-success btn-lg" onclick="javascript: form.action='/addcart';">Add To Cart</button>
+                                        <button type="submit" class="btn btn-success btn-lg" onclick="javascript: form.action='/addcart';">장바구니</button>
+                                    </div>
+                                    <div id="fcbut" class="col d-grid">
+                                        <button type="submit" class="btn btn-success btn-lg" onclick="javascript: form.action='/quickorder';">주문하기</button>
                                     </div>
                                 </div>
                             </form>
@@ -145,32 +155,30 @@
     
 	<!-- 상품 리뷰 -->
 	<div class="container">
-        <h4>Product Review</h4><hr>
-		<table id="fclist" width="100%">
-			<tr id="ltr">
-				<th id="fcth">NO</th>
-				<th id="fcth">SUBJECT</th>
-				<th id="fcth">SCORE</th>
-				<th id="fcth">ID</th>
-				<th id="fcth">DATE</th>
+        <h4>상품 리뷰&nbsp;<img src="resources/images/writing.png" style="width:30px;"></h4><hr>
+		<c:if test="${!empty reList}">
+		<c:forEach var="re" items="${reList}">
+		<table id="retab">
+			<tr>
+			<td>
+				<img src="resources/images/flower.png" style="width:50px;"><br>
+				<h6>${re.re_mid}</h6>
+			</td>
+			<td width="100%">
+				<div class="bubble">
+					${re.re_date}<br>
+					${re.re_score} | ${re.re_contents}
+				</div>
+			</td>
 			</tr>
-			<c:if test="${empty reList}">
-			<tr id="ltr">
-				<td id="ltd" colspan="5" align="center">등록된 리뷰가 없습니다.</td>
+		</table>	
+		</c:forEach>
+		</c:if>
+		<c:if test="${empty reList}">
+			<tr>
+				<td>등록된 리뷰가 없습니다.</td>
 			</tr>
-			</c:if>
-			<c:if test="${!empty reList}">
-			<c:forEach var="re" items="${reList}">
-			<tr id="ltr">
-				<td id="ltd" width="5%">${re.re_num}</td>
-				<td id="ltd" width="30%">${re.re_contents}</td>
-				<td id="ltd" width="10%">${re.re_score}</td>
-				<td id="ltd" width="10%">${re.re_mid}</td>
-				<td id="ltd" width="10%">${re.re_date}</td>
-			</tr>
-			</c:forEach>
-			</c:if>
-		</table>
+		</c:if>
 	</div>
 	<br><br><br><br>
 

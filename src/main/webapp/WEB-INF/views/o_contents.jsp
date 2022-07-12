@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Order_Contents</title>
+<title>Precious Flower - Order Contents</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -142,6 +144,13 @@ $(function(){
 	margin-top: 10px;
 	border-radius: 3px;
 }
+#rebtn {
+	border: none;
+	outline: none;
+	height: 40px;
+	width: 110px;
+	border-radius: 3px;
+}
 #back_btn:hover {
 	background-color: #6e6e6e;
 	color: white;
@@ -217,10 +226,11 @@ $(function(){
 			<p style="text-align: center;">주문번호 : ${odDet.o_num}, 주문일시 : ${odDet.o_date}</p>
 			<table id="rf_prod">
 				<tr>
-					<th colspan=2>주문상품</th>
-					<th>판매가</th>
-					<th>주문수량</th>
-					<th>주문금액</th>
+					<th colspan=2 width="7%">주문상품</th>
+					<th width="5%">판매가</th>
+					<th width="5%">주문수량</th>
+					<th width="5%">주문금액</th>
+					<th></th>
 				</tr>
 				<c:set var="sum" value="0"/>
 				<c:forEach var="od" items="${odCon}">
@@ -236,6 +246,12 @@ $(function(){
 					<td width="5%">
 						<fmt:formatNumber value="${od.od_price}" pattern="###,###"/>
 					</td>
+					<td width="1%">
+						<c:set var="ostatus" value="${odDet.o_status}"/>
+						<c:if test="${ostatus eq '거래완료'}">
+							<button id="rebtn" onclick="location.href='./review?p_code=${od.od_pcode}'">리뷰 작성</button>
+						</c:if>
+					</td>
 				</tr>
 				<c:set var="sum" value="${sum + od.od_price}"/>
 				</c:forEach>
@@ -245,7 +261,7 @@ $(function(){
 			<table id="rf_prod2">
 				<tr>
 					<th width="5%">수령인</th>
-					<th width="5%">전화번호</th>
+					<th width="10%">전화번호</th>
 					<th width="10%">수령일자</th>
 					<th width="20%">주소</th>
 				</tr>
@@ -258,7 +274,7 @@ $(function(){
 					</c:if>
 					<c:if test="${!empty odDet.o_addr1}">
 						<td width="5%">${odDet.o_rec}</td>
-						<td width="5%">${odDet.o_phone}</td>
+						<td width="10%">${odDet.o_phone}</td>
 						<td width="10%">${fn:substring(rdate,0,10)} ${fn:substring(rdate,11,16)}</td>
 						<td width="20%">(${odDet.o_addr1}) ${odDet.o_addr2} ${odDet.o_addr3}</td>
 					</c:if>
@@ -289,7 +305,7 @@ $(function(){
 					</c:if>
 					<c:if test="${!empty odDet.r_name}">
 						<td width="5%">
-							${odDet.r_name}(Rider No. ${odDet.o_rnum})
+							${odDet.r_name} (Rider 사번 : ${odDet.o_rnum})
 						</td>
 						<td width="5%">${odDet.r_phone}</td>
 						<td width="5%">${odDet.r_insurance}</td>

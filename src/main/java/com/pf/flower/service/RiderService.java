@@ -269,8 +269,11 @@ public class RiderService {
 	}
 
 
-	public ModelAndView rmodify(String rid) {
+	public ModelAndView rmodify(HttpSession session) {
 		mv = new ModelAndView();
+		
+		RiderDto rb = (RiderDto)session.getAttribute("rb");
+		String rid = rb.getR_id();
 
 		RiderDto riderList = rDao.riderSelect(rid);
 
@@ -286,7 +289,7 @@ public class RiderService {
 		String view = null;
 		String msg = null;
 
-		//String rid = multi.getParameter("rid");
+		String rid = multi.getParameter("r_id");
 
 		//getparameter는 name 값을 가져올 수 있음
 		rider.setR_id(multi.getParameter("r_id"));
@@ -307,17 +310,17 @@ public class RiderService {
 
 			rDao.riderUpdate(rider);
 
-			view = "redirect:/r_modify";
+			view = "redirect:/r_modify?r_id="+rid;
 			msg = "수정 성공";
 
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			view = "redirect:/r_modify";
+			view = "redirect:/r_modify?r_id="+rid;
 			msg = "수정 실패";
 		}
 		} else {
-			view = "redirect:/r_modify";
+			view = "redirect:/r_modify?r_id="+rid;
 			msg = "비밀번호를 다시 확인해주세요";
 		}	
 

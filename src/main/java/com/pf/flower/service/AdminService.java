@@ -375,29 +375,15 @@ public class AdminService {
 	
 	//상품 삭제
 	@Transactional
-	public String productDelete(String p_code, RedirectAttributes rttr,
-			String sysname, HttpSession session) {
+	public String productDelete(String p_code, RedirectAttributes rttr) {
 		String view = null;
 		String msg = null;
 		
 		try {
-			//리뷰 삭제(추후)
+			//리뷰 삭제
 			aDao.reviewDelete(p_code);
 			//파일목록(정보) 삭제
 			aDao.fListDelete(p_code);
-			
-			//파일(실제)들 삭제
-			//실제 파일 경로
-			String realPath = session.getServletContext().getRealPath("/");
-			realPath += "resources/upload/" + sysname;
-			log.info(realPath);
-			
-			File file = new File(realPath);
-				
-			if(file.exists()) { //파일이 있을 경우
-				file.delete();
-			}
-			
 			//게시글 삭제
 			aDao.productDelete(p_code);
 			
@@ -413,6 +399,18 @@ public class AdminService {
 		rttr.addFlashAttribute("msg", msg);
 		
 		return view;
+	}
+	
+	//홈페이지 방문자 수 카운트
+	@Transactional
+	public String visitCount(VisitDto visit) {
+		try {
+			aDao.setVisitTotalCount();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	//관리자 메인 리스트 불러오기 메소드
@@ -819,10 +817,6 @@ public class AdminService {
 			mv = new ModelAndView();
 			
 			NoticeDto notice = aDao.noticeSelect(n_num);
-			
-			int view = notice.getN_views() + 1;
-			notice.setN_views(view);
-			aDao.viewCount(notice);
 			
 			mv.addObject("notice", notice);
 			

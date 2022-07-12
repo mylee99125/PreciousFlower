@@ -18,11 +18,13 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pf.flower.dto.AdminDto;
 import com.pf.flower.dto.ListDto;
 import com.pf.flower.dto.MemberDto;
 import com.pf.flower.dto.NoticeDto;
 import com.pf.flower.dto.OrderDto;
 import com.pf.flower.dto.PfileDto;
+import com.pf.flower.dto.VisitDto;
 import com.pf.flower.dto.apListDto;
 import com.pf.flower.dto.mListDto;
 import com.pf.flower.dto.nListDto;
@@ -39,6 +41,41 @@ public class AdminController {
 	private AdminService aServ;
 	
 	private ModelAndView mv;
+	
+	@GetMapping("/aa_login")
+	public String aa_login() {
+		logger.info("aa_login()");
+		
+		return "aa_login";
+	}
+	
+	@PostMapping("/loginProc")
+	public String loginProc(AdminDto adm, HttpSession session,
+			RedirectAttributes rttr) {
+		logger.info("loginProc()");
+		
+		String view = aServ.loginProc(adm, session, rttr);
+		
+		return view;
+	}
+	
+	@GetMapping("/aa_main") 
+	public ModelAndView aa_main(VisitDto visit) {
+		logger.info("aa_main()");
+		
+		mv = aServ.getAdminList(visit);
+		
+		return mv;
+	}
+	
+	@GetMapping("/alogout")
+	public String alogout(HttpSession session) {
+		logger.info("alogout()");
+		
+		String view = aServ.alogout(session);
+		
+		return view;
+	}
 	
 	@GetMapping("/aa_plist")
 	public ModelAndView aa_plist(apListDto aplist, 
@@ -123,11 +160,10 @@ public class AdminController {
 	}
 	
 	@GetMapping("/pdelete")
-	public String productDelete(String p_code, RedirectAttributes rttr,
-			String sysname, HttpSession session) {
+	public String productDelete(String p_code, RedirectAttributes rttr) {
 		logger.info("productDelete()-p_code : "+p_code);
 		
-		String view = aServ.productDelete(p_code, rttr, sysname, session);
+		String view = aServ.productDelete(p_code, rttr);
 		
 		return view;
 	}

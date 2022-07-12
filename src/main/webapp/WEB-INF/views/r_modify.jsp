@@ -137,11 +137,11 @@ footer {
 					<table class="rm_modi">
 						<tr>
 							<td id="category">이름&nbsp;</td>
-							<td><input type="text" value="${rb.r_name}" name="r_name" id="rmp_r"  readonly></td>
+							<td><input type="text" value="${riderList.r_name}" name="r_name" id="rmp_r"  readonly></td>
 						</tr>
 						<tr>
 							<td id="category">아이디&nbsp;</td>
-							<td><input type="text" value="${rb.r_id}" name="r_id" id="rmp_r" readonly></td>
+							<td><input type="text" value="${riderList.r_id}" name="r_id" id="rmp_r" readonly></td>
 						</tr>
 						<tr>
 							<td id="category">비밀번호&nbsp;</td>
@@ -151,35 +151,35 @@ footer {
 						</tr>
 						<tr>
 							<td id="category">생년월일&nbsp;</td>
-							<td><input type="date" name="r_date" value="${rb.r_birth}">
+							<td><input type="date" name="r_birth" value="${riderList.r_birth}">
 							<div class="invalid-feedback">생년월일을 확인해주세요.</div></td>
 							
 						</tr>
 						<tr>
 							<td id="category">전화번호&nbsp;</td>
-							<td><input type="text" name="r_phone" value="${rb.r_phone}">
+							<td><input type="text" name="r_phone" value="${riderList.r_phone}">
 							<div class="invalid-feedback">전화번호를 확인해주세요.</div></td>
 							
 						</tr>
 						<tr>
 							<td id="category">이메일&nbsp;</td>
-							<td><input type="text" name="r_email" value="${rb.r_email}">
+							<td><input type="text" name="r_email" value="${riderList.r_email}">
 							<div class="invalid-feedback">이메일을 입력해주세요.</div></td>
 						</tr>
 						<tr>
 							<td id="category">우편번호&nbsp;</td>
-							<td><input type="text" id="postcode" name="r_addr1" value="${rb.r_addr1}">
+							<td><input type="text" id="postcode" name="r_addr1" value="${riderList.r_addr1}">
 								<input type="button" onclick="execDaumPostcode()" value="주소 검색">
 								<div class="invalid-feedback">주소를 확인해주세요.</div>
 							</td>
 						</tr>
 						<tr>
 							<td id="category">주소&nbsp;</td>
-							<td><input type="text" id="address" name="r_addr2" value="${rb.r_addr2}"></td>
+							<td><input type="text" id="address" name="r_addr2" value="${riderList.r_addr2}"></td>
 						</tr>
 						<tr>
 							<td id="category">상세주소&nbsp;</td>
-							<td><input type="text" id="detailAddress" name="r_addr3" value="${rb.r_addr3}"></td>
+							<td><input type="text" id="detailAddress" name="r_addr3" value="${riderList.r_addr3}"></td>
 						</tr>
 						<tr>
 							<td id="category">보험&nbsp;</td>

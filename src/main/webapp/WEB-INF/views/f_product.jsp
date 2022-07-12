@@ -12,7 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="resources/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/images/logo.png">
+    <link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/templatemo.css">
@@ -71,7 +72,6 @@ $(function(){
                 <c:forEach var="p" items="${pList}">
                     <div class="col-md-4">
                         <div class="card mb-4 product-wap rounded-0">
-                            <div class="card rounded-0">
                             	<a href="./f_contents?p_code=${p.p_code}">
 	                                <img class="card-img rounded-0 img-fluid" src="resources/upload/${p.pf_sysname}">
                             	</a>
@@ -84,7 +84,6 @@ $(function(){
                                     </ul>
                                 </div>
                                         -->
-                            </div>
                             <div class="card-body">
                             	<div style="text-align:center;">
                                 	<a href="./f_contents?p_code=${p.p_code}" class="h3 text-decoration-none">${p.p_name}</a>

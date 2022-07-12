@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cfb9b397d35123ced4bbaaee9d33325"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2cfb9b397d35123ced4bbaaee9d33325&libraries=services"></script>
 </head>
 <script type="text/javascript">
 	$(function() {
@@ -207,10 +207,9 @@ th, td {
 
 			<!-- 페이징 처리 버튼 -->
 			<div class="paging" style="text-align: center;">${ridingpaging}</div>
-
-			<!-- 지도 작성 -->
+			<!--  가게 위치 표시
 			<div id="map" style="width: 1100px; height: 600px;"></div>
-
+			-->
 			<br> <br>
 		</div>
 	</div>
@@ -231,8 +230,7 @@ th, td {
 	var geocoder = new kakao.maps.services.Geocoder();
 
 	//주소로 좌표를 검색합니다
-	geocoder
-			.addressSearch(
+	geocoder.addressSearch(
 					'인천광역시 미추홀구 매소홀로488번길 6-32',
 					function(result, status) {
 

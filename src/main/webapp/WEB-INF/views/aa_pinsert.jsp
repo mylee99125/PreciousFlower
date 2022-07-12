@@ -7,6 +7,11 @@
 <title>상품등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="resources/css/adminStyle.css">
+<style type="text/css">
+h3 {
+	padding-top: 10px;
+}
+</style>
 <script type="text/javascript">
 $(function(){
 	var msg = "${msg}";

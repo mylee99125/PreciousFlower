@@ -208,17 +208,20 @@ public class MemberService {
 		
 			
 		//회원정보 불러오기(마이페이지)
-		public ModelAndView mypage(String m_id, MemberDto member) {
-			mv = new ModelAndView();
-			
-			MemberDto md = mDao.bringMember(m_id);
-			
-			mv.addObject("md", md);
-			
-			mv.setViewName("mypage");
-			
-			return mv;
-		}
+				public ModelAndView mypage(HttpSession session) {
+					mv = new ModelAndView();
+					
+					MemberDto mb = (MemberDto)session.getAttribute("mb");
+					String m_id = mb.getM_id();
+					
+					MemberDto md = mDao.bringMember(m_id);
+					
+					mv.addObject("md", md);
+					
+					mv.setViewName("mypage");
+					
+					return mv;
+				}
 		
 		//회원정보 수정 정보 불러오기 End
 		

@@ -550,6 +550,10 @@ progress {
 	max-width: 100%;
 	height: auto
 }
+.pimg-fluid {
+	max-width: 94%;
+	height: auto
+}
 
 .img-thumbnail {
 	padding: .25rem;
@@ -4305,6 +4309,9 @@ textarea.form-control-lg {
 
 .card-img, .card-img-bottom, .card-img-top {
 	width: 100%
+}
+.pcard-img, .pcard-img-bottom, .pcard-img-top {
+	width: 94%
 }
 
 .card-img, .card-img-top {

@@ -38,6 +38,7 @@ table{
 	border-radius: 3px;
 	width: 110px;
 	height: 40px;
+	cursor: pointer;
 }
 
 .ambtn1:hover {
@@ -165,7 +166,7 @@ ul {
 	</div>
 </body>
 <script type="text/javascript">
-function rmemDelete(r_id){
+function memDelete(m_id){
 	var conf = confirm("'${member.m_name}'회원을 삭제하시겠습니까?");
 	
 	if(conf == true){

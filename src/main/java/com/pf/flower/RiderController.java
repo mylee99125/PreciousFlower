@@ -159,10 +159,10 @@ public class RiderController {
 	}
 	
 	@GetMapping("/r_modify")
-	public ModelAndView r_modify(String rid) {
-		logger.info("r_modify() : rid - " + rid);	
+	public ModelAndView r_modify(HttpSession session) {
+		logger.info("r_modify()");	
 		
-		mv = rServ.rmodify(rid);
+		mv = rServ.rmodify(session);
 		
 		return mv;
 	}

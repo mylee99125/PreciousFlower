@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PF_Review</title>
+<title>Precious Flower - Review</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 .write_re {

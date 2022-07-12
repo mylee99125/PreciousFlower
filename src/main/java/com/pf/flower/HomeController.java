@@ -46,10 +46,10 @@ public class HomeController {
 	private ModelAndView mv;
 	
 	@GetMapping("/")
-	public String home() {
+	public String home(VisitDto visit) {
 		logger.info("home()");
 		
-		aDao.setVisitTotalCount();
+		aServ.visitCount(visit);
 		
 		return "home";
 	}
@@ -59,6 +59,26 @@ public class HomeController {
 		logger.info("daycount()");
 		
 		return "daycount";
+	}
+	
+	@PostMapping("/addcart")
+	public String addcart(HttpServletRequest request, 
+			RedirectAttributes rttr) {
+		logger.info("addcart()");
+
+		String view = mServ.addcart(request, rttr);
+
+		return view;
+	}
+	
+	@PostMapping("/quickorder")
+	public String quickorder(HttpServletRequest request, 
+			RedirectAttributes rttr) {
+		logger.info("quickorder()");
+		
+		String view = mServ.quickorder(request, rttr);
+		
+		return view;
 	}
 	
 	@GetMapping("/cart")
@@ -71,11 +91,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/delCart")
-	public String delCart(int c_num,
-			RedirectAttributes rttr, HttpSession session) {
+	public String delCart(int c_num, RedirectAttributes rttr) {
 		logger.info("delCart() - c_num : " + c_num);
 		
-		String view = mServ.cartDelete(c_num, rttr, session);
+		String view = mServ.cartDelete(c_num, rttr);
 		
 		return view;
 	}
@@ -104,41 +123,6 @@ public class HomeController {
 		return view;
 	}
 	
-	@GetMapping("/aa_login")
-	public String aa_login() {
-		logger.info("aa_login()");
-		
-		return "aa_login";
-	}
-	
-	@PostMapping("/loginProc")
-	public String loginProc(AdminDto adm, HttpSession session,
-			RedirectAttributes rttr) {
-		logger.info("loginProc()");
-		
-		String view = aServ.loginProc(adm, session, rttr);
-		
-		return view;
-	}
-	
-	@GetMapping("/aa_main") 
-	public ModelAndView aa_main(VisitDto visit) {
-		logger.info("aa_main()");
-		
-		mv = aServ.getAdminList(visit);
-		
-		return mv;
-	}
-	
-	@GetMapping("/alogout")
-	public String alogout(HttpSession session) {
-		logger.info("alogout()");
-		
-		String view = aServ.alogout(session);
-		
-		return view;
-	}
-	
 	@GetMapping("/f_product")
 	public ModelAndView f_product(pListDto plist, HttpSession session) {
 		logger.info("f_product()");
@@ -149,10 +133,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/f_contents")
-	public ModelAndView f_contents(String p_code, ProductDto product) {
+	public ModelAndView f_contents(String p_code) {
 		logger.info("f_contents() - p_code : "+p_code);
 		
-		mv = mServ.fcontents(p_code, product);
+		mv = mServ.fcontents(p_code);
 		
 		return mv;
 	}
@@ -165,11 +149,10 @@ public class HomeController {
 	}
 	
 	@GetMapping("/refund")
-	public ModelAndView refund(String od_onum, String od_mid,
-			MemberDto member, OrderDto order) {
+	public ModelAndView refund(String od_onum, String od_mid) {
 		logger.info("refund()");
 		
-		mv = mServ.refundcontents(od_onum, od_mid, member, order);
+		mv = mServ.refundcontents(od_onum, od_mid);
 		
 		return mv;
 	}
@@ -207,22 +190,12 @@ public class HomeController {
 		
 		return mv;
 	}
-	
-	@PostMapping("/addcart")
-	public String addcart(HttpServletRequest request, 
-			RedirectAttributes rttr) {
-		logger.info("addcart()");
-
-		String view = mServ.addcart(request, rttr);
-
-		return view;
-	}
 
 	@GetMapping("/Order")
-	public ModelAndView selectcorder(MemberDto member, CartDto cart, HttpSession session) {
-		logger.info("selectforder()");
+	public ModelAndView selectcorder(HttpSession session) {
+		logger.info("selectcorder()");
 
-		mv = mServ.selectCorder(member, cart, session);
+		mv = mServ.selectCorder(session);
 
 		return mv;
 	}
@@ -287,11 +260,10 @@ public class HomeController {
 	}
 	
 	@PostMapping("/refsubmit")
-	public String refsubmit(OrderDto order, HttpServletRequest request,
-			RedirectAttributes rttr) {
+	public String refsubmit(OrderDto order, RedirectAttributes rttr) {
 		logger.info("refsubmit()");
 		
-		String view = mServ.refsubmit(order, request, rttr);
+		String view = mServ.refsubmit(order, rttr);
 		
 		return view;
 	}

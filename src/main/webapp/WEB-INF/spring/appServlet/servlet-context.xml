@@ -51,4 +51,76 @@
 		</beans:property>
 	</beans:bean>
 	
+	<interceptors>
+      <interceptor>
+      
+         <!-- 모든 요청을 컨트롤러 가기 전에 가로챔 -->
+         <mapping path="/**"/>
+         
+         <!-- 가로채기에서 제외되는 uri 지정 -->
+         <exclude-mapping path="/"/> <!-- 첫 페이지 제외!! -->
+         <exclude-mapping path="/daycount"/>
+         <exclude-mapping path="/cart"/>
+         <exclude-mapping path="/delCart"/>
+         <exclude-mapping path="/join"/>
+         <exclude-mapping path="/login"/>
+         <exclude-mapping path="/logout"/>
+         <exclude-mapping path="/aa_login"/>
+         <exclude-mapping path="/loginProc"/>
+         <exclude-mapping path="/f_product"/>
+         <exclude-mapping path="/f_contents"/>
+         <exclude-mapping path="/about"/>
+         <exclude-mapping path="/refund"/>
+         <exclude-mapping path="/notice"/>
+         <exclude-mapping path="/hnlist"/>
+         <exclude-mapping path="/n_contents"/>
+         <exclude-mapping path="/hnContents"/>
+         <exclude-mapping path="/addcart"/>
+         <exclude-mapping path="/quickorder"/>
+         <exclude-mapping path="/Order"/>
+         <exclude-mapping path="/forder"/>
+         <exclude-mapping path="/orderList"/>
+         <exclude-mapping path="/o_contents"/>
+         <exclude-mapping path="/ordersuccess"/>
+         <exclude-mapping path="/review"/>
+         <exclude-mapping path="/reviewWrite"/>
+         <exclude-mapping path="/refsubmit"/>
+         <exclude-mapping path="/m_joinFrm"/>
+         <exclude-mapping path="/midCheck"/>
+         <exclude-mapping path="/memInsert"/>
+         <exclude-mapping path="/memailCheck"/>
+         <exclude-mapping path="/mloginProc"/>
+         <exclude-mapping path="/mypage"/>
+         <exclude-mapping path="/memUpdate"/>
+         <exclude-mapping path="/m_delete"/>
+         <exclude-mapping path="/mdelete"/>
+         <exclude-mapping path="/r_main"/>
+         <exclude-mapping path="/rlist"/>
+         <exclude-mapping path="/r_joinFrm"/>
+         <exclude-mapping path="/idCheck"/>
+         <exclude-mapping path="/rmemInsert"/>
+         <exclude-mapping path="/remailCheck"/>
+         <exclude-mapping path="/rloginProc"/>
+         <exclude-mapping path="/r_loginFrm"/>
+         <exclude-mapping path="/r_contents"/>
+         <exclude-mapping path="/r_lcontents"/>
+         <exclude-mapping path="/r_modify"/>
+         <exclude-mapping path="/rmemUpdate"/>
+         <exclude-mapping path="/ridingInsert"/>
+         <exclude-mapping path="/r_dList"/>
+         <exclude-mapping path="/rolist"/>
+         <exclude-mapping path="/r_delete"/>
+         <exclude-mapping path="/rdelete"/>
+         <exclude-mapping path="/rlogout"/>
+         <exclude-mapping path="/rupdate"/>
+         
+         <!-- 이미지, 자바스크립트, css -->
+         <exclude-mapping path="/resources/**"/>
+         
+         <!-- 가로채기 -->
+         <beans:bean class="com.pf.flower.util.SessionInterceptor"/>
+         
+      </interceptor>
+   </interceptors>
+	
 </beans:beans>

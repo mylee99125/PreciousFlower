@@ -108,7 +108,7 @@ public class MainService {
 	}
 
 	//상품 상세 불러오기
-	public ModelAndView fcontents(String p_code, ProductDto product) {
+	public ModelAndView fcontents(String p_code) {
 		mv = new ModelAndView();
 
 		//상품 상세 가져오기
@@ -252,8 +252,7 @@ public class MainService {
 	
 	//장바구니 상품 삭제
 	@Transactional
-	public String cartDelete(int c_num,
-			RedirectAttributes rttr, HttpSession session) {
+	public String cartDelete(int c_num, RedirectAttributes rttr) {
 		String view = null;
 		String msg = null;
 		
@@ -321,6 +320,53 @@ public class MainService {
 				view = "redirect:/f_product";
 			}
 			msg = "오류가 발생하였습니다. 관리자에게 문의하세요";
+		}
+		
+		rttr.addFlashAttribute("msg", msg);
+		
+		return view;
+	}
+	
+	//바로 주문하기
+	@Transactional
+	public String quickorder(HttpServletRequest request,
+			RedirectAttributes rttr) {
+		String view = null;
+		String msg = null;
+		//세션에 들어가 있는 접속자의 정보 갱신
+		HttpSession session = request.getSession();
+				
+		//multi에서 데이터 추출
+		String id = request.getParameter("mid");
+		String pcode = request.getParameter("pcode");
+		int ccount = Integer.parseInt(request.getParameter("product-quanity"));
+		String pname = request.getParameter("pname");
+		int price = Integer.parseInt(request.getParameter("pprice"));
+				
+		int pprice = price * ccount;
+				
+		//추출한 데이터 dto에 삽입
+		CartDto cart = new CartDto();
+		cart.setC_mid(id);
+		cart.setC_pcode(pcode);
+		cart.setC_count(ccount);
+		cart.setC_pname(pname);
+		cart.setC_pprice(pprice);
+				
+		try {
+			mDao.addcart(cart);
+			
+			view = "redirect:/Order";
+		} catch(Exception e) {
+			e.printStackTrace();
+			
+			if(request.getHeader("Referer") != null) {
+				//카트 버튼 누르기 전 페이지로 redirect
+				view = "redirect:" + request.getHeader("Referer");
+			} else {
+				view = "redirect:/f_product";
+				msg = "오류가 발생하였습니다. 관리자에게 문의해주세요.";
+			}
 		}
 		
 		rttr.addFlashAttribute("msg", msg);
@@ -421,7 +467,7 @@ public class MainService {
 	}
 
 	//주문페이지에서 정보 불러오기
-	public ModelAndView selectCorder(MemberDto member, CartDto cart, HttpSession session) {
+	public ModelAndView selectCorder(HttpSession session) {
 
 		MemberDto mb = (MemberDto)session.getAttribute("mb");
 		String mid = mb.getM_id();
@@ -472,13 +518,8 @@ public class MainService {
 				mDao.upHistory(mb);
 			}
 			session.setAttribute("history", mb);
-			
-			view = "redirect:/ordersuccess";
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			view = "redirect:/Order?submit=order";
-			msg = "관리자에게 문의 부탁드립니다";
 		}
 
 		rttr.addFlashAttribute("msg", msg);
@@ -486,6 +527,7 @@ public class MainService {
 		return view;
 	}
 	
+	//주문이력 불러오기
 	public ModelAndView getMoList(OrderDto order, HttpSession session) {
 		mv = new ModelAndView();
 		
@@ -501,7 +543,7 @@ public class MainService {
 		return mv;
 	}
 	
-	//주문 상세 줄러오기
+	//주문 상세 불러오기
 	public ModelAndView odcontents(String od_onum, OrderDto order) {
 		mv = new ModelAndView();
 		
@@ -560,8 +602,7 @@ public class MainService {
 	}
 	
 	//환불 내용 불러오기
-	public ModelAndView refundcontents(String od_onum, String od_mid,
-			MemberDto member, OrderDto order) {
+	public ModelAndView refundcontents(String od_onum, String od_mid) {
 		mv = new ModelAndView();
 		
 		//회원정보 가져오기
@@ -579,8 +620,7 @@ public class MainService {
 	
 	//환불 접수
 	@Transactional
-	public String refsubmit(OrderDto order, HttpServletRequest request,
-			RedirectAttributes rttr) {
+	public String refsubmit(OrderDto order, RedirectAttributes rttr) {
 		String view = null;
 		String msg = null;
 		

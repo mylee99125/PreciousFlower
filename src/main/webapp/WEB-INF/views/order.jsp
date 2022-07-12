@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="resources/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon"
+		href="resources/images/favicon.png">
 
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/templatemo.css">
@@ -22,7 +23,6 @@
     <!-- Slick -->
     <link rel="stylesheet" type="text/css" href="resources/css/slick.min.css">
     <link rel="stylesheet" type="text/css" href="resources/css/slick-theme.css">
-    <link rel="stylesheet" href="resources/css/adminStyle.css">
     
 <style type="text/css">
 /* 오더 전용 css */
@@ -148,6 +148,14 @@
 footer {
 	margin-top: 60px;
 }
+th {
+	text-align: center;
+}
+#n-title {
+	text-align: center;
+	margin-top: 50px;
+	margin-bottom: 20px;
+}
 </style>
 
 	<!-- Start Script -->
@@ -199,7 +207,7 @@ $(function(){
     <section class="bg-light">
         <div class="container pb-5">
         
-            <br><h4>주문</h4><hr>
+            <h1 id="n-title">주문하기</h1><hr>
             <div class="row">
             
             <form class="validation-form" id="payfrm" action="/forder" method="post" novalidate>
@@ -222,7 +230,7 @@ $(function(){
 								</td>
 							</tr>
 							<tr>
-								<th>수령 일자 :</th>
+								<th>수령 일자</th>
 								<td>
 									<input class="rec_date" type="datetime-local" id="currentDate" name="o_rdate" >
 									<div class="invalid-feedback">수령하실 시간을 입력해주세요.</div>
@@ -247,7 +255,7 @@ $(function(){
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>받으시는 분 이름</th>
+								<th>받으시는 분 이름 :</th>
 								<td>
 									<input class="rec_name" type="text" name="o_rec" required>
 									<div class="invalid-feedback">받으시는 분 이름을 입력해주세요.</div>
@@ -256,12 +264,12 @@ $(function(){
 							<tr>
 								<th>받으시는 분 전화번호 :</th>
 								<td>
-									<input class="rec_phone" type="text" id="rec_phone" name="o_phone" placeholder="010-XXXX-XXXX.">
+									<input class="rec_phone" type="text" id="rec_phone" name="o_phone" placeholder="010-XXXX-XXXX">
 									<div class="invalid-feedback">받으시는 분 전화번호를 입력해주세요.</div>
 								</td>
 							</tr>
 							<tr>
-								<th>받으시는 분 주소</th>
+								<th>받으시는 분 주소 :</th>
 							</tr>
 							<tr>
 								<th>우편번호 :</th>
@@ -293,31 +301,31 @@ $(function(){
 		<table id="table" align="center">
 			<tr>
 				<th></th>
-				<th colspan="2" align="center">상품정보</th>
-				<th>수량</th>
-				<th>상품금액</th>
-				<th>합계금액</th>
+				<th colspan="2" style="text-align:center;">상품정보</th>
+				<th style="text-align:center;">수량</th>
+				<th style="text-align:center;">상품금액</th>
+				<th style="text-align:center;">합계금액</th>
 			</tr>
 			<c:if test="${!empty corder}">
 			<c:set var="count" value="0"/>
 			<c:set var="sum" value="0"/>
 			<c:forEach var="co" items="${corder}" varStatus="status">
 				<tr>
-					<td width="10%" height="80">
+					<td width="1%" height="80">
 					<input type="hidden" name="o_pcode" id="opcode" value="${co.c_pcode}"/>
 					</td>
 					
-					<td width="3%">
+					<td width="3%" style="text-align:center;">
 						<img src="resources/upload/${co.pf_sysname}" style="width:70px; vertical-align:middle;">
 					</td>
-					<td width="10%"><a>${co.c_pname}</a></td>
-					<td width="10%">${co.c_count}개</td>	
-					<td width="10%">
+					<td width="10%" style="text-align:center;"><a>${co.c_pname}</a></td>
+					<td width="10%" style="text-align:center;">${co.c_count}개</td>	
+					<td width="10%" style="text-align:center;">
 						<fmt:formatNumber value="${co.p_price}" pattern="###,###"/>원
 							<input type="hidden" name="o_pname" id="opname" value="${co.p_name}"/>
 							<input type="hidden" name="o_count" id="ocount" value="${co.c_count}"/>
 					</td>	
-					<td width="10%">
+					<td width="10%" style="text-align:center;">
 						<fmt:formatNumber value="${co.c_pprice}" pattern="###,###"/>원
 					</td>	
 				</tr>
@@ -510,10 +518,10 @@ $("#payment").click(function() {
     	console.log(jFrm);
     	
     	$.ajax({
-    		url: "forder",
-    		type: "post",
-    		data: jFrm,
-    		dataType: "json",
+    		url: "forder", //서버에 요청할 URL
+    		type: "post", //통신 타입(get/post)
+    		data: jFrm, //서버에 요청할 때 보낼 데이터
+    		dataType: "json", //응답 받을 데이터 타입
     		success: function(result){
     			console.log(result);
     			location.href='/ordersuccess';

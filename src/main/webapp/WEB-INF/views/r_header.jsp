@@ -26,7 +26,7 @@
 	<c:otherwise>&nbsp;</c:otherwise>
 	</c:choose>
 </a>
-	<a>${rb.r_name}</a> 님 환영합니다! |
+	<a>${rb.r_name}</a>라이더님 환영합니다! |
 	 <a href="./rlogout" style="color:black;">[LOGOUT]</a>
 </c:if>	 
 </div>

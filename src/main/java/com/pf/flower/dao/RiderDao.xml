@@ -31,7 +31,9 @@
 
 	<update id="riderUpdate"
 		parameterType="com.pf.flower.dto.RiderDto">
-		UPDATE rider SET r_phone=#{r_phone},
+		UPDATE rider SET 
+		r_birth=#{r_birth},
+		r_phone=#{r_phone},
 		r_email=#{r_email},
 		r_addr1=#{r_addr1},
 		r_addr2=#{r_addr2},

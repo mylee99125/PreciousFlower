@@ -38,6 +38,11 @@
 		select * from membertbl where m_id=#{m_id}
 	</select>
 	 
+	<insert id="addcart" parameterType="com.pf.flower.dto.CartDto">
+		insert into cart values
+			(default, #{c_mid}, #{c_pcode}, #{c_count}, #{c_pname}, #{c_pprice})
+	</insert>
+	
 	<select id="cartListSelect" resultType="com.pf.flower.dto.CartDto">
 		select * from clist where c_mid=#{mid}
 	</select>
@@ -45,11 +50,6 @@
 	<delete id="cartDelete" parameterType="int">
 		delete from cart where c_num=#{c_num}
 	</delete>
-	
-	<insert id="addcart" parameterType="com.pf.flower.dto.CartDto">
-		insert into cart values
-			(default, #{c_mid}, #{c_pcode}, #{c_count}, #{c_pname}, #{c_pprice})
-	</insert>
 	
 	<select id="memberSelect" parameterType="String"
 		resultType="com.pf.flower.dto.MemberDto">

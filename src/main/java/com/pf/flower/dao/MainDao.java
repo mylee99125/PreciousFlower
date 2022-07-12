@@ -22,12 +22,12 @@ public interface MainDao {
 	public String pwdSelect(String mid);
 	//회원 정보 불러오기
 	public MemberDto bringMember(String m_id);
+	//장바구니 상품 추가
+	public void addcart(CartDto cart);
 	//장바구니 목록 불러오기
 	public List<CartDto> cartListSelect(String mid);
 	//장바구니 삭제
 	public void cartDelete(int c_num);
-	//장바구니 상품 추가
-	public void addcart(CartDto cart);
 	//헤더용 회원정보 불러오기
 	public MemberDto memberSelect(String mid);
 	//회원 정보 수정

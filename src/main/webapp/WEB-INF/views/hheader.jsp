@@ -7,7 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="./resources/img/apple-icon.png">
-<link rel="shortcut icon" type="image/x-icon" href="resources/images/logo.png">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/templatemo.css">
@@ -18,12 +19,48 @@
 	href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;700;900&display=swap">
 <link rel="stylesheet" href="./resources/css/fontawesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#gomypage").click(function() {
+		var mid = "${mb.m_id}";
+		if(mid == '') {
+			alert("로그인 후 이용해주세요!");
+			location.href='/login';
+		} else {
+			location.href='./mypage?m_id=${mb.m_id}';
+		}
+	});
+	
+	$("#gool").click(function() {
+		var mid = "${mb.m_id}";
+		if(mid == '') {
+			alert("로그인 후 이용해주세요!");
+			location.href='/login';
+		} else {
+			location.href="./orderList";
+		}
+	});
+	
+	$("#gocart").click(function() {
+		var mid = "${mb.m_id}";
+		if(mid == '') {
+			alert("로그인 후 이용해주세요!");
+			location.href='/login';
+		} else {
+			location.href="./cart";
+		}
+	});
+});
+</script>
 <style type="text/css">
 .hmenu:link {
 	color: white;
 }
 .hmenu:visited {
 	color: white;
+}
+#gocart, #gomypage, #gool {
+	cursor: pointer;
 }
 </style>
 
@@ -43,8 +80,8 @@
 				</div>
 				<div class="rheader">
 					<c:if test="${empty mb.m_name}">
-						<a class="hmenu" href="./login">LOGIN</a> | 
-						<a class="hmenu" href="./join">JOIN</a>
+						<a class="hmenu" href="./login">로그인</a> | 
+						<a class="hmenu" href="./join">회원가입</a>
 					</c:if>
 					<c:if test="${!empty mb.m_name}">
 					<a>
@@ -57,7 +94,7 @@
 						</c:choose>
 					</a>
 					<a>${mb.m_name}님</a> | 
-					<a class="hmenu" href="./logout">LOGOUT</a>
+					<a class="hmenu" href="./logout">로그아웃</a>
 					</c:if>
 				</div>
 			</div>
@@ -99,16 +136,15 @@
 					</ul>
 				</div>
 				<div class="navbar align-self-center d-flex">
-					<a class="nav-icon position-relative text-decoration-none"
-						href="/cart"> 
+					<a id="gocart" class="nav-icon position-relative text-decoration-none"> 
 						<i class="fa fa-fw fa-cart-arrow-down text-white mr-1"></i> </a>
 						<div class="hdropdown">
 						<span class="hdropbtn"> 
 							<i class="fa fa-fw fa-user text-white mr-3"></i>
 						</span>
 						<div class="hdropdown-content">
-							<a href="./mypage?m_id=${mb.m_id}">MyPage</a> 
-							<a href="./orderList">OrderList</a>
+							<a id="gomypage">마이페이지</a> 
+							<a id="gool">주문내역</a>
 						</div>
 					</div>
 					</div>

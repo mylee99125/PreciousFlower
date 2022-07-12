@@ -6,15 +6,60 @@
 <meta charset="UTF-8">
 <title>Admin Login</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="./resources/css/adminStyle.css">
 <style type="text/css">
-fieldset {
-	width: 50%;
+* {
+	box-sizing: border-box;
+	font-family: 'GowunDodum-Regular';
 	margin: 0 auto;
-	text-align: center;
+	padding: 0 auto;
+}
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),url("/resources/images/backimg.jpg");
 }
 h2 {
 	text-align: center;
+	margin-bottom: 10px;
+	color: white;
+}
+#aid, #apw {
+	width: 300px;
+	height: 50px;
+	border-radius: 50px;
+	border: none;
+	margin: 5px;
+	font-size: 15px;
+}
+.loginbtn {
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	border-radius: 50px;
+	border: none;
+	background-color: lightgray;
+	font-size: 18px;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.loginbtn:hover {
+	background-color: #bebebe;
+}
+#aalofrm {
+	text-align: center;
+}
+#logindiv {
+	background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
+	opacity: 0.8;
+	width: 500px;
+	height: 300px;
+	border-radius: 10px;
+	padding-top: 35px;
+	margin-top: 80px;
 }
 </style>
 <script type="text/javascript">
@@ -27,19 +72,25 @@ $(function(){
 </script>
 </head>
 <body>
-	<div id="content">
-	<br><h2>Admin Login</h2><br>
-	<fieldset>
-	<form action="./loginProc" method="post">
+	<div id="logindiv">
+	<h2>ADMIN LOGIN</h2>
+	<form action="./loginProc" id="aalofrm" method="post">
 		<table>
-			<tr><th>ID: </th><td><input type="text" name="a_id" placeholder="id" 
-				autofocus required></td></tr>
-			<tr><th>PW: </th><td><input type="password" name="a_pwd" placeholder="password" required></td></tr>
-		</table><br>
-			<input type="submit" class="btn2" value="LOGIN">
-			<input type="reset" class="btn2" value="RESET">
+			<tr>
+				<td>
+					<img src="resources/images/user.png" style="width:25px;vertical-align:middle;">
+					<input type="text" id="aid" name="a_id" placeholder="   ID" autofocus required>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="resources/images/lock.png" style="width:25px;vertical-align:middle;">
+					<input type="password" id="apw" name="a_pwd" placeholder="   PASSWORD" required>
+				</td>
+			</tr>
+		</table>
+		<input type="submit" class="loginbtn" value="LOGIN">
 	</form>
-	</fieldset>
 	</div>
 </body>
 </html>

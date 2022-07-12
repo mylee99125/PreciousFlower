@@ -14,10 +14,11 @@
 <title>Zay Shop - Notice Contents Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 <style type="text/css">
 .content_area {
-	margin-top: 20px;
+	margin-top: 40px;
 	margin-bottom: 20px;
 }
 
@@ -46,7 +47,7 @@
 
 .hnbtn1 {
 	position:relative;
-	left: 1470px;
+	left: 1380px;
 	margin-top: 20px;
 	border: none;
 	outline: none;

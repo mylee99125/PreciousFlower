@@ -7,14 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Precious Flower - Cart Page</title>
+<title>Precious Flower - Cart</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="apple-touch-icon" href="resources/img/apple-icon.png">
 <link rel="shortcut icon" type="image/x-icon"
-	href="resources/img/favicon.ico">
+	href="resources/images/favicon.png">
 
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/templatemo.css">
@@ -51,7 +51,7 @@ $(function(){
 #cartsum {
 	height: 50px;
 	width: 500px;
-	background: #DCFFDC;
+	background-color: lightgray;
 	border-radius: 30px;
 	margin-bottom: 10px;
 	padding: 13px;
@@ -102,6 +102,22 @@ $(function(){
 #catable th {
 	height: 63px;
 }
+
+#emptycart {
+	text-align: center;
+	width: 100%;
+	padding: 20px;
+}
+.btn {
+	background-image: linear-gradient(-225deg, #FFFEFF 0%, #D7FFFE 100%);
+	width: 150px;
+	height: 50px;
+	border: none;
+	font-size: 15px;
+}
+.btn:hover {
+	background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+}
 </style>
 </head>
 <body>
@@ -112,6 +128,13 @@ $(function(){
 	<h1 id="n-title">장바구니</h1><hr>
 	<div>
 	<form action="" method="get" class="modal-content modal-body border-0 p-0">
+	<div id="emptycart">
+		<c:if test="${empty cartList}">
+					<img src="resources/images/cart.png" style="width:100px; vertical-align:middle;"><br><br>
+					장바구니에 추가된 상품이 없습니다.
+		</c:if>
+	</div>
+	<c:if test="${!empty cartList}">
 	<table id="catable" align="center">
 		<tr id="ctr">
 			<th id="cth"></th>
@@ -120,13 +143,6 @@ $(function(){
 			<th id="cth">상품금액</th>
 			<th id="cth">합계금액</th>
 		</tr>
-		<c:if test="${empty cartList}">
-			<tr id="ctr">
-				<td colspan="6" align="center">
-					장바구니에 추가된 상품이 없습니다.</td>
-			</tr>
-		</c:if>
-		<c:if test="${!empty cartList}">
 		<c:set var="count" value="0"/>
 		<c:set var="sum" value="0"/>
 		<c:forEach var="c" items="${cartList}">
@@ -153,8 +169,8 @@ $(function(){
 		<c:set var="count" value="${count + c.c_count}"/>
 		<c:set var="sum" value="${sum + c.c_pprice}"/>
 		</c:forEach>
-		</c:if>
 	</table>
+	</c:if>
 		<c:if test="${!empty cartList}">
 			<div id="cartcontainer">
 				<div id="cartsum">
@@ -163,9 +179,9 @@ $(function(){
 			</div>
 		</c:if><br><br>
 	<div id="btns">
-		<button type="button" class="btn btn-success btn-lg" onclick="location.href='./f_product';"
+		<button type="button" class="btn" onclick="location.href='./f_product';"
 			value="return">계속 쇼핑하기</button>
-		<button type="submit" class="btn btn-success btn-lg" name="submit" value="order" formaction="/Order">주문하기</button>
+		<button type="submit" class="btn" name="submit" value="order" formaction="/Order">주문하기</button>
 	</div>
 	</form>
 	</div>

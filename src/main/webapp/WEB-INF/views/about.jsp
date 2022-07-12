@@ -5,12 +5,13 @@
 <html lang="ko">
 
 <head>
-    <title>Zay Shop - About Page</title>
+    <title>Precious Flower - About Us</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="resources/img/apple-icon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="resources/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 
     <link rel="stylesheet" href="resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="resources/css/templatemo.css">
@@ -22,7 +23,7 @@
     
 <style type="text/css">
 .h1about {
-	margin-top: 80px;
+	padding-top: 80px;
 	margin-bottom: 10px;
 	text-align:center;
 }
@@ -31,7 +32,27 @@
 	margin-bottom: 30px;
 }
 .pabout {
-	color: black;
+	color: white;
+	text-align: center;
+}
+.abgimage{
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.55)),url("/resources/images/gardening.jpg");
+    background-size: 100%;
+    width: 100%;
+    height: 500px;
+}
+.abcon {
+	align: center;
+	padding-top: 100px;
+}
+#map {
+	margin-left: 150px;
+}
+#mapd {
+	height: 100px;
+}
+#aboutdiv {
+	background-image: linear-gradient(to top, #d5dee7 0%, #ffafbd 0%, #c9ffbf 100%);
 }
 </style>
 </head>
@@ -59,31 +80,40 @@
     </div>
 
 
-
-    <section class="bg-success py-5">
+	<!-- Start Banner -->
+  	<div class="abgimage">
         <div class="container">
-            <div class="row align-items-center py-5">
-                <div class="col-md-4">
-                    <img src="resources/images/tree.png" alt="Tree" style="width:400px;">
-                </div>
-                <div class="col-md-8 text-white">
+                <div class="abcon">
                     <h1 class="pabout">Who We Are</h1>
-                    <h5 class="pabout">
+                    <h4 class="pabout">
                         우리 모두가, 세상에서 가장 귀하고 소중한 꽃이 되었으면 좋겠습니다.
-                    </h5><br>
-                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;"><br>획일화된 꽃 가격과 구성을 탈피하여, 다양한 만족과 행복으로 보답하겠습니다.</p>
-                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;"><br>꽃을 처음 접하는 고객에게도 어렵지 않고, 보기 쉬운 사이트를 구성하겠습니다.</p>
-                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;"><br>내부 배달 시스템 구축을 통해, 보다 저렴한 가격으로 다가가겠습니다.</p>
+                    </h4><br>
+                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;">&nbsp;&nbsp;획일화된 꽃 가격과 구성을 탈피하여, 다양한 만족과 행복으로 보답하겠습니다.</p>
+                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;">&nbsp;&nbsp;꽃을 처음 접하는 고객에게도 어렵지 않고, 보기 쉬운 사이트를 구성하겠습니다.</p>
+                    <p class="pabout"><img src="resources/images/leaf.png" style="width:50px;">&nbsp;&nbsp;내부 배달 시스템 구축을 통해, 보다 저렴한 가격으로 다가가겠습니다.</p>
                 </div>
-            </div>
         </div>
-    </section>
+    </div>
     <!-- Close Banner -->
     
     <!-- Map start -->
-    <h1 class="h1about">Shop Locations</h1>
-    <p class="h1p">인천광역시 미추홀구 매소홀로488번길 6-32 4층</p>
-    <div id="map" style="width:100%;height:350px;"></div>
+    <div id="aboutdiv">
+   	<h1 class="h1about">Shop Locations</h1><br>
+    <div class="mapd">
+    	<div id="map" style="width:40%;height:360px;display:inline-block;"></div>
+    	<div id="location" style="display:inline-block;margin-left:40px;">
+	    	<p>주소 : 인천광역시 미추홀구 매소홀로488번길 6-32 4층 404호</p><br>
+    		<h4>오시는 길</h4>
+    		<p>
+    			<img src="resources/images/bus.png" style="width:50px;padding-right:10px;padding-bottom:10px;">영남아파트(4, 5), 신동아3차아파트(65, 65-1, 58)<br>
+    			<img src="resources/images/train.png" style="width:50px;padding-right:10px;padding-bottom:5px;">문학경기장역(인천1호선), 주안역(1호선, 인천2호선)
+    		</p><br>
+    		<h4>근처 맛집 추천</h4>
+    		<p>
+    			<img src="resources/images/meat.png" style="width:50px;padding-right:10px;padding-bottom:5px;">육심 학익점<br>
+    			14시 이전에 2인 이상 가면, 인당 8천원에 맛있는 고기와 공기밥, 된장찌개를 먹을 수 있어요!
+    		</p>
+    	</div>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f7679f2adf74d1f1df693ed5797ec776&libraries=services"></script>
 	<script>
@@ -125,13 +155,14 @@
 	    } 
 	});    
 	</script>
+	</div>
 	<!-- Map end -->
 
     <!-- Start Section -->
     <section class="container py-5">
         <div class="row text-center pt-5 pb-3">
             <div class="col-lg-6 m-auto">
-                <h1 class="h1">Our Services</h1>
+                <h1 class="h1ser">Our Services</h1>
             </div>
         </div>
         <div class="row">
@@ -139,32 +170,33 @@
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-truck fa-lg"></i></div>
-                    <h2 class="h5 mt-4 text-center">Delivery Services</h2>
+                    <h2 class="h5 mt-4 text-center">배달 서비스</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fas fa-exchange-alt"></i></div>
-                    <h2 class="h5 mt-4 text-center">Flexible Communication</h2>
+                    <h2 class="h5 mt-4 text-center">유연한 고객과의 소통</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-percent"></i></div>
-                    <h2 class="h5 mt-4 text-center">Promotion</h2>
+                    <h2 class="h5 mt-4 text-center">프로모션(진행예정)</h2>
                 </div>
             </div>
 
             <div class="col-md-6 col-lg-3 pb-5">
                 <div class="h-100 py-5 services-icon-wap shadow">
                     <div class="h1 text-success text-center"><i class="fa fa-user"></i></div>
-                    <h2 class="h5 mt-4 text-center">24 Hours Service</h2>
+                    <h2 class="h5 mt-4 text-center">24시간 문의 가능</h2>
                 </div>
             </div>
         </div>
     </section>
+    </div>
     <!-- End Section -->
 
    	<footer>

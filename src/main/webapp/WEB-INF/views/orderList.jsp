@@ -7,7 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Order_List</title>
+<title>Precious Flower - Order List</title>
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -142,7 +144,10 @@ a {
 				<td id="o_date" width="10%">${mo.o_date}</td>
 				<td id="o_total" width="5%">&#8361; <fmt:formatNumber value="${mo.o_price}" pattern="###,###"/></td>
 				<td id="o_status" width="2%"><button id="s_btn">${mo.o_status}</button></td>
-				<td width="2%"><button id="refbtn" onclick="location.href='./refund?od_mid=${mo.o_mid}&od_onum=${mo.o_num}'">환불신청</button></td>
+				<c:set var="ostatus" value="${mo.o_status}"/>
+				<c:if test="${ostatus != '환불접수'}">
+					<td width="2%"><button id="refbtn" onclick="location.href='./refund?od_mid=${mo.o_mid}&od_onum=${mo.o_num}'">환불신청</button></td>
+				</c:if>
 			</tr>
 			<c:set var="sum" value="${sum + mo.o_price}"/>
 			</c:forEach>

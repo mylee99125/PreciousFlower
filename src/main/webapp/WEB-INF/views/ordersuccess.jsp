@@ -9,11 +9,14 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="./resources/js/jquery-sakura.js"></script>
 <link rel="apple-touch-icon" href="assets/img/apple-icon.png">
-<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/favicon.png">
+	
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="./resources/css/templatemo.css">
 <link rel="stylesheet" href="./resources/css/custom.css">
 <link rel="stylesheet" href="./resources/css/jquery-sakura.css">
+
 <style type="text/css">
 .oscontent {
 	width: 80%;

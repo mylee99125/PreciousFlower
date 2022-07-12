@@ -94,10 +94,10 @@ public class MemberController {
 	// 마이페이지 회원 정보 불러오기
 		
 	@GetMapping("/mypage")
-	public ModelAndView mypage(String m_id, MemberDto member) {
-		logger.info("mypage():m_id - "+m_id);
+	public ModelAndView mypage(HttpSession session) {
+		logger.info("mypage()");
 		
-		mv = mServ.mypage(m_id, member);
+		mv = mServ.mypage(session);
 		
 		return mv;
 	}

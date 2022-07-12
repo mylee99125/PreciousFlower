@@ -66,14 +66,16 @@
 		WHERE p_code=#{p_code}
 	</update>
 	
+	<delete id="reviewDelete" parameterType="String">
+		delete from review where re_pcode=#{p_code}
+	</delete>
+	
 	<delete id="fListDelete" parameterType="String">
 		DELETE FROM productfile WHERE pf_pcode=#{p_code}
 	</delete>
+	
 	<delete id="productDelete" parameterType="String">
 		DELETE FROM product WHERE p_code=#{p_code}
-	</delete>
-	<delete id="reviewDelete" parameterType="String">
-		delete from review where re_pcode=#{p_code}
 	</delete>
 	
 	<insert id="setVisitTotalCount">
@@ -107,10 +109,11 @@
 	<select id="orderListSelect" 
 		parameterType="com.pf.flower.dto.oListDto"
 		resultType="com.pf.flower.dto.OrderDto">
-		SELECT * FROM ordertbl order by o_date desc
+		SELECT * FROM ordertbl
 		<if test="ocolname != null and ocolname != ''">
 			WHERE ${ocolname} LIKE concat('%', #{okeyword}, '%')
 		</if>
+		order by o_date desc
 		LIMIT #{opageNum}, #{olistCnt}
 	</select>
 	
@@ -126,7 +129,7 @@
 	<select id="ordersum"
 		parameterType="com.pf.flower.dto.oListDto"
 		resultType="int">
-		select sum(o_price) from ordertbl
+		select ifnull(sum(o_price), 0) from ordertbl
 		<if test="ocolname != null and ocolname != ''">
 			WHERE ${ocolname} LIKE concat('%', #{okeyword}, '%')
 		</if>
@@ -214,10 +217,11 @@
 	
 	<!-- Notice -->
 	<select id="noticeListSelect" parameterType="com.pf.flower.dto.nListDto" resultType="com.pf.flower.dto.NoticeDto">
-		SELECT * FROM nlist order by n_num
+		SELECT * FROM nlist
 		<if test="ncolname != null and ncolname != ''">
 			WHERE ${ncolname} LIKE concat('%',#{nkeyword},'%')
 		</if>
+		order by n_num
 		LIMIT #{npageNum}, #{nlistCnt}
 	</select>
 	
@@ -257,10 +261,11 @@
 	</delete>
 	
 	<select id="hnListSelect" parameterType="com.pf.flower.dto.hnListDto" resultType="com.pf.flower.dto.NoticeDto">
-		SELECT * FROM nlist order by n_num
+		SELECT * FROM nlist
 		<if test="hncolname != null and hncolname != ''">
 			WHERE ${hncolname} LIKE concat('%',#{hnkeyword},'%')
 		</if>
+		order by n_num desc
 		LIMIT #{hnpageNum}, #{hnlistCnt}
 	</select>
 	

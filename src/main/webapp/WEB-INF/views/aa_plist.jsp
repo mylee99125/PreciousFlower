@@ -20,7 +20,7 @@ $(function(){
 	
 	//검색
 	$("#psearch").click(function(){
-		var apkeyword = $("#pkeyword").val();
+		var apkeyword = $("#apkeyword").val();
 		if(apkeyword == ""){
 			alert("검색어를 입력하세요.");
 			return;
@@ -28,7 +28,7 @@ $(function(){
 		var select = $("#psel").val();
 		console.log(select, apkeyword);
 		location.href="./aa_plist?apcolname=" + select
-				+ "&apkeyword=" + keyword
+				+ "&apkeyword=" + apkeyword
 				+ "&appageNum=1";
 	});
 });
@@ -52,7 +52,7 @@ $(function(){
 				<select id="psel">
 					<option value="p_code" selected>상품코드</option>
 					<option value="p_name">상품명</option>
-				</select> <input type="text" id="pkeyword" placeholder="Search">
+				</select> <input type="text" id="apkeyword" placeholder="Search">
 				<button id="psearch">검색</button>
 			</div>
 			<br>
